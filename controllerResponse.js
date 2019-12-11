@@ -3,7 +3,7 @@ exports.successRes = (message, data, token) => {
   return {
     message,
     data: data ? data : undefined,
-    token
+    token: token ? token : undefined
     //length
   };
 };
@@ -11,7 +11,7 @@ exports.successRes = (message, data, token) => {
 exports.catchAsync = (fn, errorCode) => {
   return (req, res, next) => {
     fn(req, res, next).catch(err => {
-      next(new ErrorClass(err, errorCode));
+      return next(new ErrorClass(err, errorCode));
     });
   };
 };
